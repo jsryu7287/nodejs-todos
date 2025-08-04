@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    <%- include('partials/nav', { title: title, user: user }) %>
+    <div class="container">
+        <!-- Add User Form -->
+        <h2>Add New User</h2>
+        <form action="/admin/add" method="POST">
+            <div class="form-group">
+                <input type="text" name="user_name" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit">Add User</button>
+        </form>
+
+        <!-- User List -->
+        <h2>Existing Users</h2>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(function(user) { %>
+                    <tr>
+                        <td><%= user.user_id %></td>
+                        <td><%= user.user_name %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <!-- Edit form -->
+                            <form action="/admin/update/<%= user.user_id %>" method="POST" style="display: inline;">
+                                <input type="text" name="user_name" value="<%= user.user_name %>" required>
+                                <input type="email" name="email" value="<%= user.email %>" required>
+                                <button type="submit">Update</button>
+                            </form>
+                            <!-- Delete button -->
+                            <a href="/admin/delete/<%= user.user_id %>" class="delete" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <% if (totalPages > 1) { %>
+                <% if (currentPage > 1) { %>
+                    <a href="/admin?page=<%= currentPage - 1 %>">Previous</a>
+                <% } %>
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <a href="/admin?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+                <% if (currentPage < totalPages) { %>
+                    <a href="/admin?page=<%= currentPage + 1 %>">Next</a>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
+

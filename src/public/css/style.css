@@ -1,0 +1,151 @@
+/* General Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #1c1e21;
+}
+
+/* Forms */
+.add-todo-form, .user-table form {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.add-todo-form input[type="text"], .user-table input {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+button, .button, a.delete, a.logout-link {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+button:hover, .button:hover, a.delete:hover {
+    background-color: #0056b3;
+}
+
+/* Todo List */
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.todo-list li.completed span {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-list li .actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button, .actions a {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.actions form {
+    display: inline;
+}
+
+a.delete {
+    background-color: #dc3545;
+}
+a.delete:hover {
+    background-color: #c82333;
+}
+
+/* User Table */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th, .user-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-table th {
+    background-color: #f8f9fa;
+}
+
+.user-table .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    color: #007bff;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    border-radius: 4px;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+/* Logout Link */
+.logout-link {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #6c757d;
+}
+.logout-link:hover {
+    background-color: #5a6268;
+}
+

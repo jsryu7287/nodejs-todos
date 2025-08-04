@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <div class="page-title">
+        <%= title %>
+    </div>
+    <ul class="menu">
+        <li><a href="/todos" class="<%= title === 'Todo List' ? 'active' : '' %>">TODO 관리</a></li>
+        <% if (user && user.email === 'admin@example.com') { %>
+            <li><a href="/admin" class="<%= title === 'Admin - User Management' ? 'active' : '' %>">사용자관리</a></li>
+        <% } %>
+        <li><a href="/logout">로그아웃</a></li>
+    </ul>
+</nav>

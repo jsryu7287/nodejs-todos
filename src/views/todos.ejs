@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+    <%- include('partials/nav', { title: title, user: user }) %>
+    <div class="container">
+        <!-- Form to add a new todo -->
+        <form action="/todos" method="POST" class="add-todo-form">
+            <input type="text" name="title" placeholder="Add a new todo..." required>
+            <button type="submit">Add</button>
+        </form>
+
+        <!-- Todo list -->
+        <ul class="todo-list">
+            <% if(todos.length > 0) { %>
+                <% todos.forEach(function(todo) { %>
+                    <li class="<%= todo.is_completed ? 'completed' : '' %>">
+                        <span><%= todo.title %></span>
+                        <div class="actions">
+                            <!-- Edit form -->
+                            <form action="/todos/update/<%= todo.todo_id %>" method="POST" style="display: inline;">
+                                <input type="hidden" name="is_completed" value="<%= !todo.is_completed %>">
+                                <button type="submit"><%= todo.is_completed ? 'Undo' : 'Complete' %></button>
+                            </form>
+                            <!-- Delete button -->
+                            <a href="/todos/delete/<%= todo.todo_id %>" class="delete">Delete</a>
+                        </div>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <p>You have no todos yet. Add one above!</p>
+            <% } %>
+        </ul>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <% if (totalPages > 1) { %>
+                <% if (currentPage > 1) { %>
+                    <a href="/todos?page=<%= currentPage - 1 %>">Previous</a>
+                <% } %>
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <a href="/todos?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+                <% } %>
+                <% if (currentPage < totalPages) { %>
+                    <a href="/todos?page=<%= currentPage + 1 %>">Next</a>
+                <% } %>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
+
